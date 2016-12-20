@@ -27,7 +27,13 @@ class PathReader extends SimpleReader
 
     public function read($options=0)
     {
-        foreach(glob($this->path."/*.log") as $file_name) {
+        $this->data=array();
+        $fileList = glob($this->path."/*.log");
+        usort($fileList, function($a,$b) {
+            return filemtime($a) - filemtime($b);
+        });
+
+        foreach($fileList as $file_name) {
             $freader = new FileReader($file_name);
             foreach($this->filters as $filter) {
                 $freader->addFilter($filter);
