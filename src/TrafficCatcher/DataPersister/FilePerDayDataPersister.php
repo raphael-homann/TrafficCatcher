@@ -18,6 +18,6 @@ class FilePerDayDataPersister extends FileDataPersister
      */
     protected function getFileName($session_name)
     {
-        return "Y-m-d";
+        return date("Y-m-d");
     }
 }
