@@ -39,7 +39,6 @@ class IpTrigger implements TriggerInterface
          * 20% = 1/5 (100/20 = 5)
          * 30% = 1/3 (100/30 = 3.333)
          */
-        $_SERVER["REMOTE_ADDR"] = "88.172.112.128";
         $accept = ip2long($_SERVER["REMOTE_ADDR"])%$this->ratio===0;
         return $accept;
     }
