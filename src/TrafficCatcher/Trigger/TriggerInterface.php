@@ -22,4 +22,10 @@ interface TriggerInterface
      * @return String
      */
     public function getSessionName();
+
+    /**
+     * détermine si la capture doit etre stoppéée
+     * @return mixed
+     */
+    public function refuse();
 }

@@ -68,9 +68,14 @@ class TrafficCatcher
                     $this->session_handler = new SimpleSessionHandler();
                 }
                 $this->session_handler->setSessionName($trigger->getSessionName());
-                $this->startCatch();
                 break;
+            } elseif($trigger->refuse() && null !== $this->session_handler) {
+                $this->session_handler->stop();
             }
+        }
+
+        if($this->session_handler && $this->session_handler->getSessionName()) {
+            $this->startCatch();
         }
     }
 

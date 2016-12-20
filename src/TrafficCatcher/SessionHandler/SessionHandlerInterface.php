@@ -14,4 +14,6 @@ interface SessionHandlerInterface
     public function setSessionName($sessionName);
 
     public function getSessionName();
+
+    public function stop();
 }

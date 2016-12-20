@@ -51,4 +51,13 @@ class IpTrigger implements TriggerInterface
     {
         return $_SERVER["REMOTE_ADDR"];
     }
+
+    /**
+     * détermine si la capture doit etre stoppéée
+     * @return mixed
+     */
+    public function refuse()
+    {
+        return false;
+    }
 }

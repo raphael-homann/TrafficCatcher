@@ -24,4 +24,9 @@ class SimpleSessionHandler implements SessionHandlerInterface
     {
         return $this->session_name;
     }
+
+    public function stop()
+    {
+        $this->session_name = null;
+    }
 }

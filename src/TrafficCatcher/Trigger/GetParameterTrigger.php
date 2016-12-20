@@ -28,7 +28,7 @@ class GetParameterTrigger implements TriggerInterface
      */
     public function accept()
     {
-       return isset($_GET[$this->get_parameter_name]);
+       return isset($_GET[$this->get_parameter_name]) && !empty($_GET[$this->get_parameter_name]);
     }
 
     /**
@@ -37,6 +37,15 @@ class GetParameterTrigger implements TriggerInterface
      */
     public function getSessionName()
     {
-        $_GET[$this->get_parameter_name];
+        return $_GET[$this->get_parameter_name];
+    }
+
+    /**
+     * détermine si la capture doit etre stoppéée
+     * @return mixed
+     */
+    public function refuse()
+    {
+        return isset($_GET[$this->get_parameter_name]) && empty($_GET[$this->get_parameter_name]);
     }
 }
