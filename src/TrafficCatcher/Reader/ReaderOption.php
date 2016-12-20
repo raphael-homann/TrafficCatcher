@@ -11,5 +11,5 @@ namespace Efrogg\TrafficCatcher\Reader;
 
 class ReaderOption
 {
-
+    const SESSION_NAME_ONLY = 1;
 }

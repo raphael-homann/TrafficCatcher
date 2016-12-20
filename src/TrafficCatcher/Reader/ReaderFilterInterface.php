@@ -12,4 +12,5 @@ namespace Efrogg\TrafficCatcher\Reader;
 interface ReaderFilterInterface
 {
 
+    public function accept($session_name, $url, $post);
 }

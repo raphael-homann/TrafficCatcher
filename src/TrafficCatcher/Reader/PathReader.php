@@ -9,7 +9,48 @@
 namespace Efrogg\TrafficCatcher\Reader;
 
 
-class FileReader implements ReaderInterface
+class PathReader extends SimpleReader
 {
+
+    protected $path;
+
+
+    /**
+     * FileReader constructor.
+     * @param $path
+     */
+    public function __construct($path)
+    {
+        $this->path = rtrim($path);
+    }
+
+
+    public function read($options=0)
+    {
+        foreach(glob($this->path."/*.log") as $file_name) {
+            $freader = new FileReader($file_name);
+            foreach($this->filters as $filter) {
+                $freader->addFilter($filter);
+            }
+            $freader->read($options);
+            $this->mergeData($freader->getData(),$options);
+        }
+        return $this->data;
+    }
+
+    protected function mergeData($read,$options)
+    {
+        if($options & ReaderOption::SESSION_NAME_ONLY) {
+            foreach($read as $session_name=>$count) {
+                $this->data[$session_name]+=$count;
+            }
+        } else {
+            foreach($read as $session_name=>$pages) {
+                foreach($pages as $page) {
+                    $this->data[$session_name][]=$page;
+                }
+            }
+        }
+    }
 
 }
