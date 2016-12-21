@@ -41,10 +41,14 @@ class FileReader extends SimpleReader
                 if($options & ReaderOption::SESSION_NAME_ONLY) {
                     $this->data[$session_name]++;
                 } else {
-                    $this->data[$session_name][] = array(
-                        "url" => $url,
-                        "data" => $post
+                    $post = json_decode($post);
+                    $dataPage = array(
+                        "url" => $url
                     );
+                    if(!empty($post)) {
+                        $dataPage["data"] = $post;
+                    }
+                    $this->data[$session_name][] = $dataPage;
                 }
             }
         }
